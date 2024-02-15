@@ -9,24 +9,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.RestApi.model.Data;
 import com.example.RestApi.Exceptions.ResourceNotFoundException;
-import com.example.RestApi.Routes.DataRoutes;
+import com.example.RestApi.Repository.DataRepository;
 
 @Service
 @Transactional
-public class DataServicesImpl implements DataRoutes {
+public class DataServicesImpl implements DataService {
 
     @Autowired
-    private DataServices dataServices;
+    private DataRepository dataRepository;
 
     @Override
     public Data createData(Data data) {
-        return dataServices.save(data);
+        return this.dataRepository.save(data);
     }
 
     @Override
     public Data updateData(Data data) {
         // Find the data by id
-        Optional<Data> Data = this.dataServices.findById(data.getId());
+        Optional<Data> Data = this.dataRepository.findById(data.getId());
 
         // Update the Data
         if (Data.isPresent()) {
@@ -34,7 +34,7 @@ public class DataServicesImpl implements DataRoutes {
             updateData.setId(data.getId());
             updateData.setName(data.getName());
             updateData.setDescription(data.getDescription());
-            dataServices.save(updateData);
+            dataRepository.save(updateData);
             return updateData;
         } else {
             throw new ResourceNotFoundException("Record Not found with id: " + data.getId());
@@ -44,12 +44,12 @@ public class DataServicesImpl implements DataRoutes {
 
     @Override
     public List<Data> getAllData() {
-        return this.dataServices.findAll();
+        return this.dataRepository.findAll();
     }
 
     @Override
     public Data getAllDataById(long dataId) {
-        Optional<Data> Data = this.dataServices.findById(dataId);
+        Optional<Data> Data = this.dataRepository.findById(dataId);
 
         if (Data.isPresent()) {
             return Data.get();
@@ -61,10 +61,10 @@ public class DataServicesImpl implements DataRoutes {
 
     @Override
     public void deleteData(long dataId) {
-        Optional<Data> Data = this.dataServices.findById(dataId);
+        Optional<Data> Data = this.dataRepository.findById(dataId);
 
         if (Data.isPresent()) {
-            this.dataServices.delete(Data.get());
+            this.dataRepository.delete(Data.get());
         } else {
             throw new ResourceNotFoundException("Record Not found with id: " + dataId);
         }

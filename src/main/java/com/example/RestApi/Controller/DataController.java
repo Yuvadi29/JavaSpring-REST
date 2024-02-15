@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.RestApi.Routes.DataRoutes;
-import com.example.RestApi.Services.DataServices;
+import com.example.RestApi.Services.DataService;
 import com.example.RestApi.model.Data;
 
 import java.util.List;
@@ -21,37 +20,37 @@ import java.util.List;
 public class DataController {
 
     @Autowired
-    private DataRoutes dataRoute;
+    private DataService dataService;
 
     // Get
     @GetMapping("/data")
     public ResponseEntity<List<Data>> getAllData() {
-        return ResponseEntity.ok().body(dataRoute.getAllData());
+        return ResponseEntity.ok().body(dataService.getAllData());
     }
 
     // Get by ID
     @GetMapping("/data/{id}")
-    public ResponseEntity<Data> getAllDataById(@PathVariable long dataId) {
-        return ResponseEntity.ok().body(dataRoute.getAllDataById(dataId));
+    public ResponseEntity<Data> getAllDataById(@PathVariable long id) {
+        return ResponseEntity.ok().body(dataService.getAllDataById(id));
     }
 
     // Create
     @PostMapping("/data")
     public ResponseEntity<Data> createData(@RequestBody Data data) {
-        return ResponseEntity.ok().body(this.dataRoute.createData(data));
+        return ResponseEntity.ok().body(this.dataService.createData(data));
     }
 
     // Update
     @PutMapping("/data/{id}")
-    public ResponseEntity<Data> updateData(@PathVariable long dataId, @RequestBody Data data) {
-        data.setId(dataId);
-        return ResponseEntity.ok().body(this.dataRoute.updateData(data));
+    public ResponseEntity<Data> updateData(@PathVariable long id, @RequestBody Data data) {
+        data.setId(id);
+        return ResponseEntity.ok().body(this.dataService.updateData(data));
     }
 
     // Delete
     @DeleteMapping("/data/{id}")
-    public HttpStatus deleteData(@PathVariable long dataId){
-        this.dataRoute.deleteData(dataId);
+    public HttpStatus deleteData(@PathVariable long id) {
+        this.dataService.deleteData(id);
         return HttpStatus.OK;
     }
 }

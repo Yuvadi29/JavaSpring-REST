@@ -1,17 +1,18 @@
-package com.example.RestApi.Routes;
-
-import com.example.RestApi.model.Data;
+package com.example.RestApi.Services;
 
 import java.util.List;
 
-public interface DataRoutes {
+import com.example.RestApi.model.Data;
+
+// Creating a Data Controller
+public interface DataService  {
     // Create
     Data createData(Data data);
 
     // Read
     List<Data> getAllData();
 
-    Data getAllDataById(long dataId);
+    Data getAllDataById(long id);
 
     // Update
     Data updateData(Data data);
