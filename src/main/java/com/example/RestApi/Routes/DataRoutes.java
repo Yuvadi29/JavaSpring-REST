@@ -9,7 +9,7 @@ public interface DataRoutes {
     Data createData(Data data);
 
     // Read
-    List<Data> getAllData(Data data);
+    List<Data> getAllData();
 
     Data getAllDataById(long dataId);
 

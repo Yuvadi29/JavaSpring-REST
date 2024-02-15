@@ -44,7 +44,7 @@ public class DataServicesImpl implements DataRoutes {
     }
 
     @Override
-    public List<Data> getAllData(Data data) {
+    public List<Data> getAllData() {
         return this.dataServices.findAll();
     }
 
