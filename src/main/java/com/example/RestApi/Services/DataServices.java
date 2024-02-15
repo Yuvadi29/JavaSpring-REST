@@ -1,10 +1,10 @@
-package com.example.RestApi.Controllers;
+package com.example.RestApi.Services;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.example.RestApi.model.Data;
 
 // Creating a Data Controller
-public interface DataController extends MongoRepository<Data, Long> {
+public interface DataServices extends MongoRepository<Data, Long> {
 
 }

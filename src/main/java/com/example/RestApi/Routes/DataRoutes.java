@@ -11,7 +11,7 @@ public interface DataRoutes {
     // Read
     List<Data> getAllData(Data data);
 
-    Data getAllDataById(long productId);
+    Data getAllDataById(long dataId);
 
     // Update
     Data updateData(Data data);
