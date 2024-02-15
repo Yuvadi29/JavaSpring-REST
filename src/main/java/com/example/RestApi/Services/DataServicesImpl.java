@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.RestApi.model.Data;
+import com.example.RestApi.Exceptions.ResourceNotFoundException;
 import com.example.RestApi.Routes.DataRoutes;
 
 @Service
@@ -36,11 +37,9 @@ public class DataServicesImpl implements DataRoutes {
             dataServices.save(updateData);
             return updateData;
         } else {
-            // throw new ResourceNotFoundException("Record Not found with id: " +
-            // data.getId());
-            System.out.println("Record Not Found with id: " + data.getId());
+            throw new ResourceNotFoundException("Record Not found with id: " + data.getId());
+            // System.out.println("Record Not Found with id: " + data.getId());
         }
-        return data;
     }
 
     @Override
@@ -55,9 +54,9 @@ public class DataServicesImpl implements DataRoutes {
         if (Data.isPresent()) {
             return Data.get();
         } else {
-            System.out.println("Record Not Found with id: " + dataId);
+            // System.out.println("Record Not Found with id: " + dataId);
+            throw new ResourceNotFoundException("Record Not found with id: " + dataId);
         }
-        return null;
     }
 
     @Override
@@ -67,7 +66,7 @@ public class DataServicesImpl implements DataRoutes {
         if (Data.isPresent()) {
             this.dataServices.delete(Data.get());
         } else {
-            System.out.println("Record Not Found with id: " + dataId);
+            throw new ResourceNotFoundException("Record Not found with id: " + dataId);
         }
 
     }
